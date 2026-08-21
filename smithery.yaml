@@ -1,0 +1,34 @@
+# Smithery configuration for EasyJur
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_easyjur
+
+name: easyjur-mcp
+displayName: "EasyJur"
+description: >
+  Wrapper da API oficial do EasyJur (gestão jurídica): processos (e partes, pedidos, financeiros, documentos, mensagens), pessoas, agenda, oportunidades, timesheet, financeiro (receitas/despesas), grupos e usuários. Leitura + criação de processos, pessoas, agenda e oportunidades. Autenticação por token de API do escritório.
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/easyjur-mcp
+repository: https://github.com/mcp-dir/easyjur-mcp
+
+tags:
+  - easyjur
+  - brazil
+  - med
+  - vertical
+  - read-write
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_easyjur
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_easyjur/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
